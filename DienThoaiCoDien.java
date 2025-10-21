@@ -11,22 +11,30 @@ public class DienThoaiCoDien extends CUAHANGDIENTHOAI{
     }
     public DienThoaiCoDien(DienThoaiCoDien other){
         super(other);
-        this.banphim = banphim;
-        this.thoigianthoai = thoigianthoai;
+        this.banphim = other.banphim;
+        this.thoigianthoai = other.thoigianthoai;
     }
-    public String setBanPhim(){
+    public String getBanPhim(){
         return banphim;
     }
-    public void getBanPhim(String banphim){
+    public void setBanPhim(String banphim){
         this.banphim = banphim;
     }
-    public String setThoiGianThoai(){
+    public String getThoiGianThoai(){
         return thoigianthoai;
     }
-    public void getThoiGianThoai(String thoigianthoai){
+    public void setThoiGianThoai(String thoigianthoai){
         this.thoigianthoai = thoigianthoai;
     }
     @Override public void nhap(){
-        System.out
+        super.nhap();
+        System.out.println("nhap kieu ban phim");
+        banphim = sc.nextLine();
+        System.out.println("nhap thoi gian thoai ");
+        thoigianthoai = sc.nextLine();
+    }
+    @Override public void xuat(){
+        super.xuat();
+        System.out.printf("%-15s %-20s", banphim ,thoigianthoai );
     }
 }
