@@ -120,33 +120,36 @@ public void xoa(){
     ma = sc.nextLine();
     xoa(ma);
 }
-public void sua(String ma, int choice, String tensp, int soluong, String donvitien,
-                 float dongia, String hedieuhanh, String dungluong,
-                 String banphim, String thoigianthoai) {
+public void sua(String ma, int choice) {
     boolean found = false;
     for (int i = 0; i < num; i++) {
         if (sp[i].getMaSP().equals(ma)) {
             found = true;
             switch (choice) {
                 case 1:
-                    sp[i].setTenSP(tensp);
+                    System.out.println("vui lonng nhap ten san pham moi");
+                    sp[i].setTenSP(sc.nextLine());
                     System.out.println("Đã sửa tên thành công!");
                     break;
                 case 2:
-                    sp[i].setSoLuong(soluong);
+                    System.out.println("vui long nhap so luong moi ");
+                    sp[i].setSoLuong(sc.nextInt());
                     System.out.println("Đã sửa số lượng thành công!");
                     break;
                 case 3:
-                    sp[i].setDonViTien(donvitien);
+                    System.out.println("vui long nhap don vi tien moi ");
+                    sp[i].setDonViTien(sc.nextLine());
                     System.out.println("Đã sửa đơn vị tiền thành công!");
                     break;
                 case 4:
-                    sp[i].setDonGia(dongia);
+                    System.out.println("vui long nhap don gia moi ");
+                    sp[i].setDonGia(sc.nextLine());
                     System.out.println("Đã sửa đơn giá thành công!");
                     break;
                 case 5:
                     if (sp[i] instanceof DienThoaiThongMinh) {
-                        ((DienThoaiThongMinh) sp[i]).setHeDieuHanh(hedieuhanh);
+                        System.out.println("vui long nhap he dieu hanh moi ");
+                        ((DienThoaiThongMinh) sp[i]).setHeDieuHanh(sc.nextLine());
                         System.out.println("Đã sửa hệ điều hành thành công!");
                     } else {
                         System.out.println("Sản phẩm này không có hệ điều hành!");
@@ -154,7 +157,8 @@ public void sua(String ma, int choice, String tensp, int soluong, String donviti
                     break;
                 case 6:
                     if (sp[i] instanceof DienThoaiThongMinh) {
-                        ((DienThoaiThongMinh) sp[i]).setDungLuong(dungluong);
+                        System.out.println("nhap dung luong moi cho san pham ");
+                        ((DienThoaiThongMinh) sp[i]).setDungLuong(sc.nextLine());
                         System.out.println("Đã sửa dung lượng thành công!");
                     } else {
                         System.out.println("Sản phẩm này không có dung lượng!");
@@ -162,7 +166,8 @@ public void sua(String ma, int choice, String tensp, int soluong, String donviti
                     break;
                 case 7:
                     if (sp[i] instanceof DienThoaiCoDien) {
-                        ((DienThoaiCoDien) sp[i]).setBanPhim(banphim);
+                        System.out.println("nhap thoi gian thoai moi cho san pham ");
+                        ((DienThoaiCoDien) sp[i]).setBanPhim(sc.nextLine());
                         System.out.println("Đã sửa kiểu bàn phím thành công!");
                     } else {
                         System.out.println("Sản phẩm này không có bàn phím!");
@@ -170,12 +175,16 @@ public void sua(String ma, int choice, String tensp, int soluong, String donviti
                     break;
                 case 8:
                     if (sp[i] instanceof DienThoaiCoDien) {
-                        ((DienThoaiCoDien) sp[i]).setThoiGianThoai(thoigianthoai);
+                        System.out.println("nhap thoi gian thoai moi cho san pham ");
+                        ((DienThoaiCoDien) sp[i]).setThoiGianThoai(sc.nextLine());
                         System.out.println("Đã sửa thời gian thoại thành công!");
                     } else {
                         System.out.println("Sản phẩm này không có thời gian thoại!");
                     }
                     break;
+                case 0:
+                    sp[i].nhap();
+                    System.out.println("sua tat ca thanh cong ");
                 default:
                     System.out.println("Lựa chọn không hợp lệ!");
             }
@@ -185,5 +194,17 @@ public void sua(String ma, int choice, String tensp, int soluong, String donviti
         System.out.println("Không tìm thấy sản phẩm có mã: " + ma);
     }
 }
-
+public void sua(){
+    System.out.println("vui long nhap ma can sua ");
+    String ma = sc.nextLine();
+    for(int i = 0 ; i < num;i++){
+        if(sp[i].getMaSP().equals(ma)){
+            System.out.println("da tim thay san pham . Vui long nhap lua chon de sua ");
+            System.out.println("1 sua san pham, 2 so luong, 3 don vi tien,4 don gia ,5 he dieu thanh , 6 dung luong , 7 kieu ban phim , 8 thoi gian thoai , 0 sua het ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            sua(ma,choice); 
+        }
+    }
+}
 }
