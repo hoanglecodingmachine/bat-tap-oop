@@ -6,9 +6,9 @@
     private String tensp;
     private int soluong;
     private String donvitien;
-    private float dongia;
+    private double dongia;
     public CUAHANGDIENTHOAI(){}
-    public CUAHANGDIENTHOAI(String masp,String tensp,int soluong,String donvitien,float dongia){
+    public CUAHANGDIENTHOAI(String masp,String tensp,int soluong,String donvitien ,double dongia){
       this.masp = masp;
       this.tensp = tensp;
       this.soluong = soluong;
@@ -37,24 +37,24 @@
     public int getSoLuong(){
       return soluong;
     }
-    public void setSoLuong(int soluong){
+  public void setSoLuong(int soluong){
       this.soluong = soluong;
     }
-    public String getDonViTien(){
+  public String getDonViTien(){
       return donvitien;
     }
-    public void setDonViTien(String donvitien){
+  public void setDonViTien(String donvitien){
       this.donvitien = donvitien;
     }
-    public float getDonGia(){
+  public double getDonGia(){
       return dongia;
     }
-    public void setDonGia(float dongia){
+  public void setDonGia (double dongia){
       this.dongia = dongia;
     }
   
     
-      public void nhap(){
+  public void nhap(){
           System.out.println("nhap ma san pham ");
           masp = sc.nextLine();
           System.out.println("nhap ten san pham ");
@@ -62,30 +62,16 @@
           System.out.println("nhap so luong san pham ");
           soluong = sc.nextInt();
           sc.nextLine();
-          System.out.println("nhap don vi tien (vnd , usd ,euro) ");
+          System.out.println("nhap don vi tien ");
           donvitien = sc.nextLine();
           System.out.println("nhap don gia cho san pham ");
-          dongia = sc.nextFloat();
+          dongia = sc.nextDouble();
           sc.nextLine();
       }
-      public void xuat() {
+  public void xuat() {
       System.out.printf("%-15s %-20s %-10d %-10s %-10.2f%n",
               masp, tensp, soluong, donvitien, dongia);
   }
   public abstract double Tong_Gia_Tien();
-  public class QuyDoiTien {
-    private static final double USD_TO_VND = 25000;
-    private static final double EUR_TO_VND = 27000;
-
-    public static double toVND(double dongia, String donvitien) {
-        switch (donvitien.toUpperCase()) {
-            case "USD":
-                return dongia * USD_TO_VND;
-            case "EUR":
-                return dongia * EUR_TO_VND;
-            default:
-                return dongia; // mặc định là VND
-        }
-    }
-}
+ 
   } 

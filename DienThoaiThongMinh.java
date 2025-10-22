@@ -4,7 +4,7 @@ public class DienThoaiThongMinh extends CUAHANGDIENTHOAI{
     private String hedieuhanh;
     private String dungluong;
     public DienThoaiThongMinh(){}
-    public DienThoaiThongMinh(String masp,String tensp,int soluong,String donvitien,float dongia,String hedieuhanh, String dungluong){
+    public DienThoaiThongMinh(String masp,String tensp,int soluong,String donvitien,double dongia,String hedieuhanh, String dungluong){
      super(masp,tensp,soluong,donvitien,dongia);
      this.hedieuhanh = hedieuhanh;
      this.dungluong = dungluong;   
@@ -36,6 +36,9 @@ public class DienThoaiThongMinh extends CUAHANGDIENTHOAI{
     }
     @Override public void xuat(){
         super.xuat();
-        System.println("he dieu hanh la " + hedieuhanh + " ,dung luong la :" + dungluong);
+        System.out.printf("15%s 20%s",hedieuhanh, dungluong);
+    }
+    @Override public double Tong_Gia_Tien(){
+        return getSoLuong()*getDonGia();
     }
 }

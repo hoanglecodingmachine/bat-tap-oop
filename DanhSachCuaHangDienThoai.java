@@ -143,7 +143,7 @@ public void sua(String ma, int choice) {
                     break;
                 case 4:
                     System.out.println("vui long nhap don gia moi ");
-                    sp[i].setDonGia(sc.nextFloat());
+                    sp[i].setDonGia(sc.nextDouble());
                     System.out.println("Đã sửa đơn giá thành công!");
                     break;
                 case 5:
@@ -307,42 +307,8 @@ public void Search_SoLuong(){
         System.out.println("khong tim thay san pham ");
       }
 }
-public CUAHANGDIENTHOAI[] Search_DonViTien(String donvitien){
-      int count = 0;
-      CUAHANGDIENTHOAI[] kq = new CUAHANGDIENTHOAI[0]; 
-      boolean found = false;
-      for(int i = 0 ; i < num ; i++){
-        if(sp[i].getDonViTien().toLowerCase().contains(donvitien.toLowerCase())){
-            found = true;
-            System.out.println("da tim thay san pham can tim ");
-            sp[i].xuat();
-            kq = Arrays.copyOf(kq, count + 1);
-            kq[count] = sp[i];
-            count++;
-        }
-      }
-      if(!found){
-        System.out.println("khong tim thay san pham ");
-        return null;
-      }
-      return kq;
-}
-public void Search_DonViTien(){
-      System.out.println("nhap don vi tien cua san pham (usd,vnd,yen,euro) ");
-      String donvitien = sc.nextLine();
-      boolean found = false;
-      for(int i = 0 ; i < num ; i++){
-        if(sp[i].getDonViTien().toLowerCase().contains(donvitien.toLowerCase())){
-            found = true;
-            System.out.println("da tim thay san pham can tim ");
-            sp[i].xuat();
-        }
-      }
-      if(!found){
-        System.out.println("khong tim thay san pham ");
-      }
-}
-public CUAHANGDIENTHOAI[] Search_DonGia(float min,float max){
+
+public CUAHANGDIENTHOAI[] Search_DonGia(double min,double max){
       int count = 0;
       CUAHANGDIENTHOAI[] kq = new CUAHANGDIENTHOAI[0]; 
       boolean found = false;
@@ -364,9 +330,9 @@ public CUAHANGDIENTHOAI[] Search_DonGia(float min,float max){
 }
 public void Search_DonGia(){
       System.out.println("nhap gia tien nho nhat ");
-      float min = sc.nextFloat();
+      double min = sc.nextDouble();
       System.out.println("nhap gia tien lon nhat ");
-      float max = sc.nextFloat();
+      double max = sc.nextDouble();
       boolean found = false;
       for(int i = 0 ; i < num ; i++){
         if(sp[i].getDonGia() >= min && sp[i].getDonGia() <= max){
@@ -493,7 +459,7 @@ public void Search_BanPhim(){
         }
     }
 }
-public CUAHANGDIENTHOAI[] Search_ThoiGianThoai(String thoigianthoai) {
+public CUAHANGDIENTHOAI[] Search_ThoiGianThoai(int min , int max) {
     boolean found = false;
     CUAHANGDIENTHOAI[] kq = new CUAHANGDIENTHOAI[0];
     int count = 0;
@@ -501,7 +467,7 @@ public CUAHANGDIENTHOAI[] Search_ThoiGianThoai(String thoigianthoai) {
     for (int i = 0; i < num; i++) {
         if (sp[i] instanceof DienThoaiCoDien) {
             DienThoaiCoDien dcd = (DienThoaiCoDien) sp[i];
-            if (dcd.getThoiGianThoai().toLowerCase().contains(thoigianthoai.toLowerCase())) {
+            if (dcd.getThoiGianThoai() <= max && dcd.getThoiGianThoai() >= min) {
                 found = true;
                 System.out.println("Tim thay danh sach san pham:");
                 dcd.xuat();
@@ -519,16 +485,115 @@ public CUAHANGDIENTHOAI[] Search_ThoiGianThoai(String thoigianthoai) {
     return kq;
 }
 public void Search_ThoiGianThoai(){
-    System.out.println("nhap thoi gian thoai trung binh cua dien thoai can tim(24h,100h,500h)");
-    String tgt = sc.nextLine();
+        System.out.print("Nhập thời gian thoại nhỏ nhất (h): ");
+    int min = sc.nextInt();
+
+    System.out.print("Nhập thời gian thoại lớn nhất (h): ");
+    int max = sc.nextInt();
+    sc.nextLine();
     for(int i = 0 ; i < num; i++){
         if(sp[i] instanceof DienThoaiCoDien){
            DienThoaiCoDien d1 = (DienThoaiCoDien) sp[i];
-           if(d1.getThoiGianThoai().toLowerCase().contains(tgt.toLowerCase())){
+           if(d1.getThoiGianThoai() >= min && d1.getThoiGianThoai() <= max){
             System.out.println("da tim thay san pham ");
             d1.xuat();
            }
         }
     }
+}
+public int[] ThongKe_SoLuong(){
+    int duoi20 = 0 , tren20 = 0 , tren50 = 0;
+    for(int i = 0 ; i < num ; i++){
+        if(sp[i].getSoLuong() < 20){
+            duoi20++;
+        }else if(sp[i].getSoLuong() >= 20 && sp[i].getSoLuong() < 50){
+            tren20++;
+        }else tren50++;
+    }
+    System.out.printf( "%-50s %d\n","so luong san pham ton kho duoi 20 san pham la " , duoi20);
+    System.out.printf( "%-50s %d\n","so luong san pham ton kho tren 20 san pham la " , tren20);
+    System.out.printf( "%-50s %d\n","so luong san pham ton kho tren 50 san pham nao la " , tren50);
+    return new int[]{duoi20,tren20,tren50};
+}
+public int[] ThongKe_DonGia(){
+    int duoi10tr = 0 , khoang20tr = 0 , tren20tr = 0;
+    for(int i = 0 ; i < num ; i++){
+        if(sp[i].getDonGia() < 10000000){
+            duoi10tr++;
+        }else if(sp[i].getDonGia() < 20000000 && sp[i].getDonGia() >= 10000000){
+            khoang20tr++;
+        }else tren20tr++;
+    }
+    System.out.printf("%-50s %d\n", "So luong san pham co gia duoi 10 trieu la", duoi10tr);
+    System.out.printf("%-50s %d\n", "So luong san pham co gia tam 20 trieu la", khoang20tr);
+    System.out.printf("%-50s %d\n", "So luong san pham co gia tren 20 trieu la", tren20tr);
+
+    return new int[]{duoi10tr,khoang20tr,tren20tr};
+}
+public double[] ThongKe_HeDieuHanh(){
+  double android = 0.0, ios = 0.0, other = 0.0;
+    double tongSoLuong = 0.0;
+
+    for (int i = 0; i < num; i++) {
+        if (sp[i] instanceof DienThoaiThongMinh) {
+            DienThoaiThongMinh sp1 = (DienThoaiThongMinh) sp[i];
+            String hdh = sp1.getHeDieuHanh().toLowerCase();
+            int sl = sp1.getSoLuong();
+
+            tongSoLuong += sl;
+
+            if (hdh.equals("android")) {
+                android += sl;
+            } else if (hdh.equals("ios")) {
+                ios += sl;
+            } else {
+                other += sl;
+            }
+        }
+    }
+
+     android = (android * 100.0) / tongSoLuong;
+    ios     = (ios * 100.0) / tongSoLuong;
+    other   = (other * 100.0) / tongSoLuong;
+
+    // Xuất kết quả
+    System.out.printf("%-40s %.2f%%\n", "Tỷ lệ sản phẩm Android:", android);
+    System.out.printf("%-40s %.2f%%\n", "Tỷ lệ sản phẩm iOS:", ios);
+    System.out.printf("%-40s %.2f%%\n", "Tỷ lệ sản phẩm hệ điều hành khác:", other);
+
+    return new double[]{android, ios, other};
+}
+public int[] ThongKe_DungLuong(){
+    int gb = 0 , 256g = 0 , 512g = 0;
+     int tongSoLuong = 0;
+
+    for (int i = 0; i < num; i++) {
+        tongSoLuong += sp[i].getSoLuong();
+
+        if (sp[i] instanceof DienThoaiThongMinh) {
+            DienThoaiThongMinh sp1 = (DienThoaiThongMinh) sp[i];
+            String hdh = sp1.getHeDieuHanh();
+
+            if (hdh.equalsIgnoreCase("android")) {
+                android += sp1.getSoLuong();
+            } else if (hdh.equalsIgnoreCase("ios")) {
+                ios += sp1.getSoLuong();
+            } else {
+                other += sp1.getSoLuong();
+            }
+        }
+    }
+
+    // Tính phần trăm
+    double ptAndroid = (android * 100.0) / tongSoLuong;
+    double ptIos = (ios * 100.0) / tongSoLuong;
+    double ptOther = (other * 100.0) / tongSoLuong;
+
+    // In kết quả
+    System.out.printf("%-40s %.2f%%\n", "Tỷ lệ sản phẩm Android:", ptAndroid);
+    System.out.printf("%-40s %.2f%%\n", "Tỷ lệ sản phẩm iOS:", ptIos);
+    System.out.printf("%-40s %.2f%%\n", "Tỷ lệ sản phẩm khác:", ptOther);
+
+    return new int[]{ios, android, other};
 }
 }
