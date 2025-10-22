@@ -2,9 +2,9 @@ import java.util.Scanner;
 public class DienThoaiCoDien extends CUAHANGDIENTHOAI{
     private static Scanner sc = new Scanner(System.in);
     private String banphim;
-    private String thoigianthoai;
+    private int thoigianthoai;
     public DienThoaiCoDien(){}
-    public DienThoaiCoDien(String masp,String tensp,int soluong,String donvitien,float dongia,String banphim, String thoigianthoai){
+    public DienThoaiCoDien(String masp,String tensp,int soluong,String donvitien,float dongia,String banphim, int thoigianthoai){
         super(masp,tensp,soluong,donvitien,dongia);
         this.banphim = banphim;
         this.thoigianthoai = thoigianthoai;
@@ -20,10 +20,10 @@ public class DienThoaiCoDien extends CUAHANGDIENTHOAI{
     public void setBanPhim(String banphim){
         this.banphim = banphim;
     }
-    public String getThoiGianThoai(){
+    public int getThoiGianThoai(){
         return thoigianthoai;
     }
-    public void setThoiGianThoai(String thoigianthoai){
+    public void setThoiGianThoai(int thoigianthoai){
         this.thoigianthoai = thoigianthoai;
     }
     @Override public void nhap(){
@@ -31,7 +31,7 @@ public class DienThoaiCoDien extends CUAHANGDIENTHOAI{
         System.out.println("nhap kieu ban phim");
         banphim = sc.nextLine();
         System.out.println("nhap thoi gian thoai ");
-        thoigianthoai = sc.nextLine();
+        thoigianthoai = sc.nextInt();
     }
     @Override public void xuat(){
         super.xuat();

@@ -72,5 +72,20 @@
       System.out.printf("%-15s %-20s %-10d %-10s %-10.2f%n",
               masp, tensp, soluong, donvitien, dongia);
   }
-    
+  public abstract double Tong_Gia_Tien();
+  public class QuyDoiTien {
+    private static final double USD_TO_VND = 25000;
+    private static final double EUR_TO_VND = 27000;
+
+    public static double toVND(double dongia, String donvitien) {
+        switch (donvitien.toUpperCase()) {
+            case "USD":
+                return dongia * USD_TO_VND;
+            case "EUR":
+                return dongia * EUR_TO_VND;
+            default:
+                return dongia; // mặc định là VND
+        }
+    }
+}
   } 
